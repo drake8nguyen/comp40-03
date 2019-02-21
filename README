@@ -1,0 +1,167 @@
+Minh Duc Nguyen and Andrew Gross
+HW3 Locality
+README
+
+Our iteration of HW3 could not have been done without the help
+of TAs Patrick Wolfe, Winston Tan, Manish Aryal, Mert Erden, Ashton Stephens,
+Dylan Hoffman, Sam Swoap, Daniel Lan, Jared Hwang, Victoria Zhao and of course 
+Professor Mendelsohn.
+
+Everything should be correctly implemented according to the spec.
+
+We spent about forty hours on this project.
+
+Program Architecture:
+
+    - A2Methods is a set of function pointers that invoke similar functions
+      either from the UArray2b interface (implemented by us) or the UArray2
+      interface provided by the solution to the previous homework.
+
+    - Depending on the choice of the user, the program will traverse
+      an inputted image's pixel map in the specified order (row-major,
+      col-major, or block-major) and uses the approriate interface (row-major
+      and col-major imply that the UArray2 is used whereas block-major 
+      implies the UArray2b is used).
+
+    - ppmtrans is the module that controls the rotation of inputted images.
+
+    - apply_functs.c and interface is the module that 
+      contains the apply functions that are used to rotate all 
+      the pixels in a picture by mapping each pixel's
+      index to a new index corresponding to the math behind the rotation.
+
+    - run_transform.c is the module that creates the output image from the
+      pixel data after the apply functions have been mapped over them.
+
+    - UArray2b and UArray2 interfaces are used by A2Methods to offer
+      a data structure for the pixels of each input image.
+
+Part E:
+
+Machine: Intel(R) Core(TM) i7-6700 CPU @ 3.40GHz
+
+*******************************************************************************
+* File name * Dimension * instr/pixel * Major * Angle * Time(ns) *Time/pix(ns)*
+*******************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* nrs-paper * 259 x 168 * 269   * Row   *   90  * 11694231   *  269     *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* nrs-paper * 259 x 168 * 259   * Row   *  180  * 11250650   *  259     *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* nrs-paper * 259 x 168 *   83  * Col   *   90  * 3603222    *  83      *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* nrs-paper * 259 x 168 *   84  * Col   *   180 * 3634638    * 84       *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* nrs-paper * 259 x 168 *   149 * Block *   90  * 6464527    *  149     *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* nrs-paper * 259 x 168 *   163 * Block *   180 * 7094120    *  163     *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* boxes_1   * 63 x 63   *   114 * Row   *   90  * 452178     * 114      *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* boxes_1   * 63 x 63   *   248 * Row   *  180  * 982662     *  248     *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* boxes_1   * 63 x 63   *   59  * Col   *   90  * 235018     *  59      *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* boxes_1   * 63 x 63   *   68  * Col   *   180 * 268065     * 68       *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* boxes_1   * 63 x 63   *   206 * Block *   90  * 817501     *  206     *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* boxes_1   * 63 x 63   *   683 * Block *   180 * 2712152    * 683      *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* mandrill  * 512 * 512 *   93  * Row   *   90  * 24390876   *  93      *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* mandrill  * 512 * 512 *   62  * Row   *  180  * 16228834   * 62       *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* mandrill  * 512 * 512 *   69  * Col   *   90  * 18185927   * 69       *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* mandrill  * 512 * 512 *   105 * Col   *   180 * 27503546   *  105     *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* mandrill  * 512 * 512 *   131 * Block *   90  * 34444851   * 131      *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+*************************************************************************
+*           *           *       *       *       *            *          *
+*           *           *       *       *       *            *          *
+* mandrill  * 512 * 512 * 137   * Block *  180  *  35892210  *   137    *
+* .ppm      *           *       *       *       *            *          *
+*************************************************************************
+
+    Discussion: 
+        Col-major rotations perform the best compared to row-major and
+    block-major rotations with regards to time per pixel. Time per pixel
+    changes little with changes in image size. This is because although
+    the total time is more, the number of pixel is taken into account by
+    dividing the total time by the total number of pixels. Plain arrays 
+    appear to run faster compared to their blocked counterparts because
+    blocking uses more division and division takes longer runtime.
+    Overall, col-major rotations run faster than row-major rotations
+    and block-major rotations. The difference between rotating 90
+    and 180 degrees is marginal.
+
+
+
